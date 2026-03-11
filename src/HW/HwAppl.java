@@ -121,7 +121,7 @@ public class HwAppl {
 	}
 	
 	public static void sportLoto(int min, int max, int numberDigits) {
-		if(max < min || numberDigits < 1) 
+		if(max < min || numberDigits < 1 || numberDigits > IntStream.range(min, max).count()) 
 			throw new IllegalArgumentException("Illegal args");
 		Random rand = new Random();
 		IntStream.rangeClosed(min, max).boxed().sorted((_, _) -> rand.nextInt(1, 3)*2-3).limit(numberDigits).forEach(elem -> System.out.print(elem + " "));

@@ -218,6 +218,9 @@ class HwTest {
 		assertThrows(IllegalArgumentException.class, () -> {
 			HwAppl.sportLoto(1, 10, -2);
 		});
+		assertThrows(IllegalArgumentException.class, () -> {
+			HwAppl.sportLoto(1, 10, 20);
+		});
 	}
 	
 	@Test
