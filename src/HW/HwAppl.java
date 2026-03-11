@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.OptionalDouble;
 import java.util.Random;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class HwAppl {
 
@@ -115,7 +114,6 @@ public class HwAppl {
 		System.out.printf("Original array: ");
 		Arrays.stream(ar).forEach(elem -> System.out.print(elem + " "));
 		System.out.println();
-		Random rand = new Random();
 		System.out.print("Shaffled array: "); 
 		IntStream.generate(() -> new Random().nextInt(0, ar.length))
         	.distinct()
