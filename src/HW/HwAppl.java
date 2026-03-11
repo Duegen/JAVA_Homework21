@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.OptionalDouble;
 import java.util.Random;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class HwAppl {
 
@@ -42,7 +43,7 @@ public class HwAppl {
 		System.out.println("\n=======[Employees with salary greater then average]======");
 		displayEmployeesAvgSalary(employees);
 		System.out.println("\n=======[Array shaffling]=================================");
-		int[] sortedArr = new Random().ints(20, 1, 100).sorted().toArray();
+		int[] sortedArr = new Random().ints(20, 1, 100).distinct().limit(20).sorted().toArray();
 		displayShuffledArray(sortedArr);
 		System.out.println("\n=======[Sport loto]======================================");
 		sportLoto(1, 49, 7);
@@ -116,15 +117,20 @@ public class HwAppl {
 		System.out.println();
 		Random rand = new Random();
 		System.out.print("Shaffled array: "); 
-		Arrays.stream(ar).boxed().sorted((_, _) -> rand.nextInt(1, 3)*2-3).forEach(elem -> System.out.print(elem + " "));
+		IntStream.generate(() -> new Random().nextInt(0, ar.length))
+        	.distinct()
+        	.limit(ar.length)
+        	.forEach(index -> System.out.print(ar[index] + " "));
 		System.out.println();
 	}
 	
 	public static void sportLoto(int min, int max, int numberDigits) {
-		if(max < min || numberDigits < 1 || numberDigits > IntStream.range(min, max).count()) 
+		if(max < min || numberDigits < 1 || numberDigits > IntStream.rangeClosed(min, max).count()) 
 			throw new IllegalArgumentException("Illegal args");
-		Random rand = new Random();
-		IntStream.rangeClosed(min, max).boxed().sorted((_, _) -> rand.nextInt(1, 3)*2-3).limit(numberDigits).forEach(elem -> System.out.print(elem + " "));
+		IntStream.generate(() -> new Random().nextInt(min, max + 1))
+        .distinct()
+        .limit(numberDigits)
+        .forEach(number -> System.out.print(number + " "));
 		System.out.println();
 	}
 }
